@@ -1,6 +1,6 @@
 # Daily Scheduler
 
-<img src="./assets/images/dailyplanner" alt="screenshot of the daily planner" height="300px"/>
+<img src="./assets/images/dailyplanner.png" alt="screenshot of the daily planner" height="300px"/>
 
 ## Purpose
 
@@ -22,11 +22,11 @@ https://hartsfieldt.github.io/countersign/
 
 ## Git Hub
 
-https://github.com/hartsfieldt/countersign
+https://github.com/hartsfieldt/organizedpeople
 
 ## Screencastify
 
-https://drive.google.com/file/d/1JADkhep0lhJa9DQtEeVoj1ZZ4DWMvsMa/view
+Coming soon...
 
 ## Contribution
 
