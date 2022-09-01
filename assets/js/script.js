@@ -1,25 +1,85 @@
+var tasks = [
+    {
+        time: 8,
+        tasks: [""]
+    },
+    {
+        time: 9,
+        tasks: [""]
+    },
+    {
+        time: 10,
+        tasks: [""]
+    },
+    {
+        time: 11,
+        tasks: [""]
+    },
+    {
+        time: 12,
+        tasks: [""]
+    },
+    {
+        time: 13,
+        tasks: [""]
+    },
+    {
+        time: 14,
+        tasks: [""]
+    },
+    {
+        time: 15,
+        tasks: [""]
+    },
+    {
+        time: 16,
+        tasks: [""]
+    },
+    {
+        time: 17,
+        tasks: [""]
+    },
+    {
+        time: 18,
+        tasks: [""]
+    },
+];
+
 var currentDay = document.getElementById("currentDay");
 var currentTime = document.getElementById("hour");
 var hourBlock = document.getElementById("time-block");
 var taskList = document.querySelector("description");
-var tasks = [];
-
-// tasks = [8, 9, 10, 11, 12, 1, 2, 3, 4, 5, 6]
-// index of task = [0, 1 , 2, 3, 4, 5, 6, 7, 8, 9, 10]
-// tasks[2] = brush teeth => time = 10am
-// tasks[9] = go home => time = 5pm
-
 
 var todaysDate = moment();
 currentDay.textContent = todaysDate.format("LLLL");
 
+var timeRow =  $('.hour');
+timeRow.each(function (index) {
+    var usersInput = $(this).children('textarea');
+    let rowHour = $(this).attr('id').split('_')[1];
+    console.log($(this).attr('id'))
+    if (moment().hours() < rowHour) {
+        usersInput.addClass('future')
+    }
+    else if (moment().hours() == rowHour) {
+        usersInput.addClass('present')
+    }
+    else {
+        usersInput.addClass('past')
+    }
+
+    let taskTime = tasks[index].time;
+    let taskText = tasks[index].tasks;
+    usersInput.html(taskText);
+    console.log(rowHour, taskTime);
+
+})
 
 var returnTasks = JSON.parse(localStorage.getItem("tasks"));
 console.log(returnTasks)
 
 //for loop to iterate over tasks
 // for loop you need to input textarea value
-
 
 $( ".btn" ).click(function() {
     var taskValue = $(this).siblings("textarea").val();
