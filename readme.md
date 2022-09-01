@@ -24,10 +24,6 @@ https://hartsfieldt.github.io/organizedpeople/
 
 https://github.com/hartsfieldt/organizedpeople
 
-## Screencastify
-
-Coming soon...
-
 ## Contribution
 
 Made with ❤️ by Teresa Hartsfield

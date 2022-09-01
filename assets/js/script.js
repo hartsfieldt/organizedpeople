@@ -1,4 +1,8 @@
-var tasks = [
+let tasks = JSON.parse(localStorage.getItem('tasks'));
+
+if (!tasks) {
+
+tasks = [
     {
         time: 8,
         tasks: [""]
@@ -44,17 +48,25 @@ var tasks = [
         tasks: [""]
     },
 ];
+}
 
 var currentDay = document.getElementById("currentDay");
 var currentTime = document.getElementById("hour");
 var hourBlock = document.getElementById("time-block");
 var taskList = document.querySelector("description");
+var dateTime = function () {
+    var todaysDate = moment();
+    currentDay.textContent = todaysDate.format("LLLL");
+}
+//for the color coding to work this feature has to live update.
+$(document).ready(function () {
+    dateTime();
+    setInterval(dateTime, 1000)
+});
 
-var todaysDate = moment();
-currentDay.textContent = todaysDate.format("LLLL");
-
-var timeRow =  $('.hour');
+var timeRow =  $('.row');
 timeRow.each(function (index) {
+    console.log($(this).children());
     var usersInput = $(this).children('textarea');
     let rowHour = $(this).attr('id').split('_')[1];
     console.log($(this).attr('id'))
@@ -67,46 +79,22 @@ timeRow.each(function (index) {
     else {
         usersInput.addClass('past')
     }
-
-    let taskTime = tasks[index].time;
+    // connecting the previously defined task array to the html element.
     let taskText = tasks[index].tasks;
     usersInput.html(taskText);
-    console.log(rowHour, taskTime);
-
 })
-
-var returnTasks = JSON.parse(localStorage.getItem("tasks"));
-console.log(returnTasks)
-
-//for loop to iterate over tasks
-// for loop you need to input textarea value
-
+// when I click the save button it stores the items the user inputs.
 $( ".btn" ).click(function() {
+    console.log($(this))
     var taskValue = $(this).siblings("textarea").val();
-    var taskId = $(this).siblings("textarea").attr('id');
-    if (taskId === '8') {
-        tasks[0] = taskValue.trim();
-    } else if (taskId === '9') {
-        tasks[1] = taskValue.trim();
-    } else if (taskId === '10'){
-        tasks[2] = taskValue.trim();
-    } else if (taskId === '11'){
-        tasks[3] = taskValue.trim();
-    } else if (taskId === '12'){
-        tasks[4] = taskValue.trim();
-    } else if (taskId === '1'){
-        tasks[5] = taskValue.trim();
-    } else if (taskId === '2'){
-        tasks[6] = taskValue.trim();
-    } else if (taskId === '3'){
-        tasks[7] = taskValue.trim();
-    } else if (taskId === '4'){
-        tasks[8] = taskValue.trim();
-    } else if (taskId === '5'){
-        tasks[9] = taskValue.trim();
-    } else if (taskId === '6'){
-        tasks[10] = taskValue.trim();
-    };
+    let rowHour = $(this).parent().attr('id').split('_')[1];
+    console.log($(this).siblings());
+    if (taskValue) {
+        tasks.forEach (function(taskObject){
+            if (taskObject.time == rowHour){
+                taskObject.tasks.push(taskValue);
+            }
+        })
         localStorage.setItem('tasks', JSON.stringify(tasks));
-})
-
+    }
+});
